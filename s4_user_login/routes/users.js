@@ -56,17 +56,17 @@ router.post('/register', function(req, res, next){
    //Check for errors
    var errors=req.validationErrors();
    
-   if(errors){
-     res.render('register',{
-       errors:errors,
+   if (errors) {
+     res.render('register', {
+       errors: errors,
        name: name,
        email: email,
        username: username,
        password: password,
        password2: password2
      });
-   }else{
-     var newUser=new User({
+   } else {
+     var newUser = new User({
        name: name,
        email: email,
        username: username,
