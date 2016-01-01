@@ -1,7 +1,17 @@
 var express = require('express');
 var router = express.Router();
-var mongo=require('mongodb');
-var db=require('monk')('locahost/nodeblog');
+
+router.get('/show/:category', function(req, res, next){
+    console.log(req.db);
+    var db=req.db;
+    var posts=db.get('posts');
+    posts.find({category:req.params.category},{}, function(err, posts){
+        res.render('index',{
+            "title":req.param.category,
+            "posts":posts
+        });
+    });
+});
 
 router.get('/add', function(req, res, next) {
     res.render('addcategory',{

@@ -8,8 +8,8 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var mongo = require('mongodb');
 var db =require('monk')('localhost/nodeblog');
-var multer = require('multer');
-var upload=multer({ dest: './public/images/uploads'});
+// var multer = require('multer');
+// var upload=multer({ dest: './public/images/uploads'});
 var flash = require('connect-flash');
 
 var routes = require('./routes/index');
@@ -20,12 +20,17 @@ var app = express();
 
 app.locals.moment=require('moment');
 
+app.locals.truncateText=function(text, length){
+  var truncateText=text.substring(0, length);
+  return truncateText;
+}
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 //Handle File Uploads & Multipart Data
-//app.use();
+//app.use(upload);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
